@@ -800,6 +800,51 @@
       "point 2": 19,
       "parent": null,
       "description": null
+    },
+    "U#XO": {
+      "direction": "x",
+      "glyph 1": "U",
+      "point 1": 29,
+      "glyph 2": "U",
+      "point 2": 4,
+      "parent": "XOPQ",
+      "description": null
+    },
+    "U#YO": {
+      "direction": "x",
+      "glyph 1": "U",
+      "point 1": 14,
+      "glyph 2": "U",
+      "point 2": 19,
+      "parent": "YOPQ",
+      "description": null
+    },
+    "U#XT": {
+      "direction": "x",
+      "glyph 1": "U",
+      "point 1": 4,
+      "glyph 2": "U",
+      "point 2": 14,
+      "parent": "XTRA",
+      "description": null
+    },
+    "U#XQ": {
+      "direction": "x",
+      "glyph 1": "U",
+      "point 1": "8",
+      "glyph 2": "U",
+      "point 2": 9,
+      "parent": "XTEQ",
+      "description": null
+    },
+    "U#YQ": {
+      "direction": "y",
+      "glyph 1": "U",
+      "point 1": "7",
+      "glyph 2": "U",
+      "point 2": 6,
+      "parent": "YTEQ",
+      "description": null
     }
   },
   "glyphs": {
@@ -3456,22 +3501,6 @@
       }
     },
     "U": {
-      "29 4": {
-        "name": "XOUC",
-        "direction": "x"
-      },
-      "24 9": {
-        "name": "YOUC",
-        "direction": "y"
-      },
-      "14 19": {
-        "name": "YOUC",
-        "direction": "x"
-      },
-      "4 14": {
-        "name": "XTUR",
-        "direction": "x"
-      },
       "24 1": {
         "name": "YTUC",
         "direction": "y"
@@ -3536,20 +3565,36 @@
         "name": "YTOS",
         "direction": "y"
       },
+      "29 4": {
+        "name": "U#XO",
+        "direction": "x"
+      },
+      "14 19": {
+        "name": "U#YO",
+        "direction": "x"
+      },
+      "24 9": {
+        "name": "U#YO",
+        "direction": "y"
+      },
+      "4 14": {
+        "name": "U#XT",
+        "direction": "x"
+      },
       "8 9": {
-        "name": "XQUC",
+        "name": "U#XQ",
         "direction": "x"
       },
       "9 10": {
-        "name": "XQUC",
+        "name": "U#XQ",
         "direction": "x"
       },
       "7 6": {
-        "name": "YQUC",
+        "name": "U#YQ",
         "direction": "y"
       },
       "11 12": {
-        "name": "YQUC",
+        "name": "U#YQ",
         "direction": "y"
       }
     },

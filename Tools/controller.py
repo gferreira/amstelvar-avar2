@@ -426,7 +426,7 @@ if __name__ == '__main__':
 
     referenceSource = os.path.join(p.referenceSourcesFolder, 'deprecated', f'Amstelvar-{subFamily}_wght400.ufo')
 
-    # glyphNames = ['eng']
+    glyphNames = ['napostrophe']
     # glyphNames = 'dollar cent guarani colonsign cedi peso won kip naira'.split()
     # glyphNames = parseGString(p.defaultFont, '/ae/OE')
     # glyphNames = p.smartSets['figures']['currency']
@@ -449,7 +449,7 @@ if __name__ == '__main__':
     # p.copyKerningFromDefault()
 
     # --- building glyphs ---
-    # p.buildCompositeGlyphs(glyphNames, preflight=False)
+    # p.buildCompositeGlyphs(glyphNames, parametric=False, tuning=False, reference=True, preflight=False)
 
     # --- measuring ---
     # p.extractMeasurements()
@@ -471,7 +471,7 @@ if __name__ == '__main__':
 
     # --- normalization ---
     # p.cleanupSources(parametric=False, tuning=False, reference=True)
-    # p.normalizeSources(parametric=False, tuning=True, reference=True)
+    # p.normalizeSources(parametric=True, tuning=True, reference=True)
 
     # --- project info ---
     # p.printSettings()
@@ -485,7 +485,7 @@ if __name__ == '__main__':
     # p.proofSourcesGlyphSet(showCompatible=False, validateComposites=True)
 
     # --- build fonts ---
-    p.buildVariableFont(debug=False, featureWriter=False, noGDEF=True, subset=None)
+    # p.buildVariableFont(debug=False, featureWriter=False, noGDEF=True, subset=None)
     # p.buildInstancesVariableFont(clear=True, ufo=True)
 
     end = time.time()

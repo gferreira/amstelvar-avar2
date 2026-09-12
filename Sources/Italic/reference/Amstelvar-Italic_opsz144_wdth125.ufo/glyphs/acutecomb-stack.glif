@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="acutecomb-stack" format="2">
+	<outline>
+		<contour>
+			<point x="6" y="1272" type="line"/>
+			<point x="250" y="1524" type="line" smooth="yes"/>
+			<point x="272" y="1546"/>
+			<point x="319" y="1579"/>
+			<point x="345" y="1579" type="qcurve" smooth="yes"/>
+			<point x="374" y="1579"/>
+			<point x="414" y="1541"/>
+			<point x="414" y="1512" type="qcurve" smooth="yes"/>
+			<point x="414" y="1485"/>
+			<point x="388" y="1449"/>
+			<point x="355" y="1430" type="qcurve" smooth="yes"/>
+			<point x="27" y="1245" type="line"/>
+		</contour>
+	</outline>
+	<anchor name="_top" x="61" y="1053"/>
+	<anchor name="top" x="159" y="1561"/>
+	<anchor name="_topright" x="61" y="1052"/>
+</glyph>

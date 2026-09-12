@@ -4,6 +4,6 @@
 	<advance width="1237"/>
 	<outline>
 		<component base="L"/>
-		<component base="dotaccentcomb.case" xOffset="385" yOffset="-950"/>
+		<component base="periodcentered-loclCAT.case" xOffset="928.0000000001" yOffset="750"/>
 	</outline>
 </glyph>

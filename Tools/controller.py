@@ -392,6 +392,18 @@ class AmstelvarA2Controller(xProject):
 
         self.addCustomKeysToLib()
 
+        # HACK: change GRAD axis visibility and order
+        gradeAxis = [axis for axis in self.designspace.axes if axis.tag == 'GRAD'][0]
+        gradeAxis.hidden = False
+        sortedAxes = []
+        for i, axis in enumerate(self.designspace.axes):
+            if axis.tag == 'GRAD':
+                continue
+            if i == 3:
+                sortedAxes.append(gradeAxis)
+            sortedAxes.append(axis)
+        self.designspace.axes = sortedAxes
+
         self.save()
 
     def proofSourcesGlyphSet(self, showCompatible=True, validateComposites=True):
@@ -418,7 +430,7 @@ if __name__ == '__main__':
 
     folder = os.path.dirname(os.getcwd())
 
-    subFamily = ['Roman', 'Italic'][1]
+    subFamily = ['Roman', 'Italic'][0]
 
     start = time.time()
 
@@ -455,11 +467,11 @@ if __name__ == '__main__':
     # p.extractMeasurements()
 
     # --- build designspace ---
-    # p.parametricAxesHidden = True
-    # p.tuningAxesHidden = True
-    # p.tuning = True # also used to direct BlendsPreview proof to its folder
-    # p.useLongAxisNames = True # keep it disabled during development!
-    # p.buildDesignspace(instances=True, parentParametric=True)
+    p.parametricAxesHidden = True
+    p.tuningAxesHidden = True
+    p.tuning = True # also used to direct BlendsPreview proof to its folder
+    p.useLongAxisNames = True # keep it disabled during development!
+    p.buildDesignspace(instances=True, parentParametric=True)
     # p.validateDesignspace(locations=True, mappings=True, instances=False)
     # p.validateSources(parametric=False, tuning=False, reference=True)
 
@@ -471,7 +483,7 @@ if __name__ == '__main__':
 
     # --- normalization ---
     # p.cleanupSources(parametric=True, tuning=True, reference=True)
-    p.normalizeSources(parametric=True, tuning=False, reference=False)
+    # p.normalizeSources(parametric=True, tuning=False, reference=False)
 
     # --- project info ---
     # p.printSettings()

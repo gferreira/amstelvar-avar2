@@ -1053,6 +1053,11 @@
 			<string>Euro</string>
 			<string>guillemotleft</string>
 			<string>guillemotright</string>
+			<string>fivesuperior</string>
+			<string>sixsuperior</string>
+			<string>sevensuperior</string>
+			<string>eightsuperior</string>
+			<string>ninesuperior</string>
 		</array>
 	</dict>
 </plist>

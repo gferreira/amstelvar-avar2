@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="sevensuperior" format="2">
 	<unicode hex="2077"/>
-	<advance width="694"/>
+	<advance width="680"/>
 	<outline>
 		<contour>
-			<point x="17" y="1230" type="line"/>
-			<point x="33" y="1500" type="line"/>
-			<point x="709" y="1500" type="line"/>
-			<point x="709" y="1418" type="line"/>
-			<point x="474" y="1019" type="line"/>
-			<point x="324" y="653" type="line"/>
-			<point x="175" y="653" type="line"/>
-			<point x="175" y="695" type="line"/>
-			<point x="389" y="1045" type="line"/>
-			<point x="561" y="1341" type="line"/>
-			<point x="539" y="1354" type="line"/>
-			<point x="131" y="1354" type="line"/>
-			<point x="105" y="1230" type="line"/>
+			<point x="18" y="1247" type="line"/>
+			<point x="33" y="1504" type="line"/>
+			<point x="695" y="1504" type="line"/>
+			<point x="695" y="1428" type="line"/>
+			<point x="464" y="1023" type="line"/>
+			<point x="314" y="653" type="line"/>
+			<point x="178" y="653" type="line"/>
+			<point x="178" y="693" type="line"/>
+			<point x="413" y="1044" type="line"/>
+			<point x="623" y="1357" type="line"/>
+			<point x="600" y="1371" type="line"/>
+			<point x="131" y="1371" type="line"/>
+			<point x="106" y="1247" type="line"/>
 		</contour>
 	</outline>
 </glyph>

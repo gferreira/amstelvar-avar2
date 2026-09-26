@@ -50,8 +50,8 @@
 		</contour>
 		<contour>
 			<point x="679" y="-155" type="line"/>
-			<point x="1099" y="442" type="line"/>
-			<point x="1233" y="336" type="line"/>
+			<point x="876" y="125" type="line"/>
+			<point x="1024" y="59" type="line"/>
 			<point x="850" y="-174" type="line"/>
 		</contour>
 	</outline>

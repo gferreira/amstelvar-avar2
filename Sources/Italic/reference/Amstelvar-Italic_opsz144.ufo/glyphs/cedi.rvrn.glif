@@ -34,7 +34,7 @@
 		</contour>
 		<contour>
 			<point x="441" y="-122" type="line"/>
-			<point x="500" y="102" type="line"/>
+			<point x="501" y="106" type="line"/>
 			<point x="537" y="93" type="line"/>
 			<point x="484" y="-132" type="line"/>
 		</contour>

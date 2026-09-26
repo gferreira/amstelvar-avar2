@@ -1,26 +1,20 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <glyph name="diagonalbarO" format="2">
-  <advance width="623"/>
-  <outline>
-    <contour>
-      <point x="102" y="56" type="line"/>
-      <point x="102" y="56" type="line"/>
-      <point x="43" y="-125" type="line"/>
-      <point x="0" y="-124" type="line"/>
-      <point x="62" y="64" type="line"/>
-      <point x="62" y="64" type="line"/>
-      <point x="520" y="1458" type="line"/>
-      <point x="520" y="1458" type="line"/>
-      <point x="572" y="1616" type="line"/>
-      <point x="614" y="1615" type="line"/>
-      <point x="559" y="1449" type="line"/>
-      <point x="559" y="1449" type="line"/>
-    </contour>
-  </outline>
-  <lib>
-    <dict>
-      <key>com.xTools4.tempEdit.glyphSetPath</key>
-      <string>/Users/gferreira/fontbureau/amstelvar-avar2/Sources/Roman/reference/Amstelvar-Roman_opsz144.ufo/glyphs</string>
-    </dict>
-  </lib>
+	<advance width="623"/>
+	<outline>
+		<contour>
+			<point x="102" y="56" type="line"/>
+			<point x="102" y="56" type="line"/>
+			<point x="43" y="-125" type="line"/>
+			<point x="0" y="-124" type="line"/>
+			<point x="62" y="64" type="line"/>
+			<point x="62" y="64" type="line"/>
+			<point x="520" y="1458" type="line"/>
+			<point x="520" y="1458" type="line"/>
+			<point x="572" y="1616" type="line"/>
+			<point x="614" y="1615" type="line"/>
+			<point x="559" y="1449" type="line"/>
+			<point x="559" y="1449" type="line"/>
+		</contour>
+	</outline>
 </glyph>

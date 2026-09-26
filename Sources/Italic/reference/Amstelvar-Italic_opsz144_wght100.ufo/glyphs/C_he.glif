@@ -42,4 +42,5 @@
 			<point x="1123" y="0" type="line"/>
 		</contour>
 	</outline>
+	<anchor name="cy_descender" x="1128" y="19"/>
 </glyph>

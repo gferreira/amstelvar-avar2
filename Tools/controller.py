@@ -5,7 +5,7 @@ import xTools4.modules.xproject
 reload(xTools4.modules.xproject)
 
 import os, glob, time, json, string, itertools
-from fontTools.designspaceLib import DesignSpaceDocument, SourceDescriptor, AxisMappingDescriptor
+from fontTools.designspaceLib import DesignSpaceDocument, SourceDescriptor, AxisMappingDescriptor, RuleDescriptor
 from xTools4.modules.xproject import xProject
 from xTools4.modules.measurements import setSourceNamesFromMeasurements, readMeasurements, extractMeasurements, permille
 from xTools4.modules.sys import timer
@@ -75,8 +75,11 @@ class AmstelvarA2Controller(xProject):
             # condition sets
             [
                 [
-                    dict(tag="wght", minimum=750, maximum=1000),
-                    dict(tag="wdth", minimum=50),
+                    dict(name="wght", minimum=750, maximum=1000),
+                    # dict(name="wdth", maximum=110)
+                ],
+                [
+                    dict(name="wdth", minimum=50, maximum=75)
                 ],
             ],
             # substitutions
@@ -137,17 +140,6 @@ class AmstelvarA2Controller(xProject):
         for tag in ['GRAD']:
             axisName = self.getAxisName(tag)
             location[axisName] = 0
-
-        # # TO-DO: move the sorting code below to a separate, reusable method
-        # # sort parameters based on list of parametric axes
-        # locationSorted = {}
-        # for parameterName in self.parametricAxes:
-        #     locationSorted[parameterName] = location[parameterName]
-        # for key, value in location.items():
-        #     if key not in locationSorted:
-        #         locationSorted[key] = value
-        # return locationSorted
-
         return location
 
     @property
@@ -245,7 +237,19 @@ class AmstelvarA2Controller(xProject):
         super().addInstances(familyName=f'{self.familyName} {self.subFamily}')
 
     def addSubstitutionRules(self):
-        pass
+        for ruleName, rule in self._substitutionRules.items():
+            conditionSets, substitutions = rule
+            R = RuleDescriptor()
+            R.name = ruleName
+            for conditionSet in conditionSets:
+                _conditionSet = []
+                for condition in conditionSet:
+                    condition['name'] = self.getAxisName(condition['name'])
+                    _conditionSet.append(condition)
+                R.conditionSets.append(_conditionSet)
+            for substitution in substitutions:
+                R.subs.append(substitution)
+            self.designspace.addRule(R)
 
     def buildBlendsFile(self, parentParametric=True):
         if not os.path.exists(self.referenceBlendsPath):
@@ -371,35 +375,7 @@ class AmstelvarA2Controller(xProject):
         with open(self.blendsPath, 'w', encoding='utf-8') as f:
             json.dump(blendsDict, f, indent=2)
 
-    def patchBlendsFile(self):
-
-        # DEPRECATED!
-
-        # import blends data
-        with open(self.blendsPath, 'r', encoding='utf-8') as f:
-            blendsDict = json.load(f)
-
-        # import & apply patch data
-        patchPath = self.blendsPath.replace('.json', '_patch.json')
-        with open(patchPath, 'r', encoding='utf-8') as f:
-            patchDict = json.load(f)
-
-        if self.verbose:
-            print('\tpatching blends file...')
-
-        for key1, value1 in patchDict.items():
-            if key1 not in blendsDict:
-                print(f'{key1} not in blends dict')
-                continue
-            for key2, value2 in value1.items():
-                for k, v in value2.items():
-                    blendsDict[key1][key2][k] = v
-
-        # save patched blends data
-        with open(self.blendsPath, 'w', encoding='utf-8') as f:
-            json.dump(blendsDict, f, indent=2)
-
-    def buildDesignspace(self, instances=False, parentParametric=False):
+    def buildDesignspace(self, instances=False, parentParametric=False, substitutionRules=True):
 
         if self.verbose:
             print(f'building {os.path.split(self.designspacePath)[-1]}...')
@@ -424,6 +400,9 @@ class AmstelvarA2Controller(xProject):
         if instances:
             self.addInstances()
 
+        if substitutionRules:
+            self.addSubstitutionRules()
+
         self.addCustomKeysToLib()
 
         # HACK: change GRAD axis visibility and order
@@ -437,9 +416,6 @@ class AmstelvarA2Controller(xProject):
                 sortedAxes.append(gradeAxis)
             sortedAxes.append(axis)
         self.designspace.axes = sortedAxes
-
-        # TO-DO: implement glyph substitution rules (BARS)
-        # self.addSubstitutionRules()
 
         self.save()
 
@@ -476,7 +452,7 @@ if __name__ == '__main__':
     referenceSource = os.path.join(p.referenceSourcesFolder, 'deprecated', f'Amstelvar-{subFamily}_wght400.ufo')
 
     # glyphNames = ['Oslash']
-    glyphNames = 'Oslash.rvrn oslash.rvrn'.split()
+    # glyphNames = 'Oslash.rvrn oslash.rvrn'.split()
     # glyphNames = parseGString(p.defaultFont, '/ae/OE')
     # glyphNames = p.smartSets['figures']['oldstyle']
     # glyphNames = p.smartSets['uppercase']['greek'] + p.smartSets['lowercase']['greek']
@@ -504,11 +480,11 @@ if __name__ == '__main__':
     # p.extractMeasurements()
 
     # --- build designspace ---
-    # p.parametricAxesHidden = True
-    # p.tuningAxesHidden = True
-    # p.tuning = False # also used to direct BlendsPreview proof to its folder
-    # p.useLongAxisNames = False # keep it disabled during development!
-    # p.buildDesignspace(instances=True, parentParametric=True)
+    p.parametricAxesHidden = True
+    p.tuningAxesHidden = True
+    p.tuning = False # also used to direct BlendsPreview proof to its folder
+    p.useLongAxisNames = False # keep it disabled during development!
+    p.buildDesignspace(instances=True, parentParametric=True, substitutionRules=True)
     # p.validateDesignspace(locations=True, mappings=True, instances=False)
     # p.validateSources(parametric=False, tuning=False, reference=True)
 
@@ -519,8 +495,8 @@ if __name__ == '__main__':
     # p.calculateTuningSources(glyphNames, referenceSource, levels=[1,2,3], tuneBaseGlyphs=True)
 
     # --- normalization ---
-    p.cleanupSources(parametric=True, tuning=True, reference=True)
-    p.normalizeSources(parametric=True, tuning=True, reference=True)
+    # p.cleanupSources(parametric=True, tuning=True, reference=True)
+    # p.normalizeSources(parametric=True, tuning=True, reference=True)
 
     # --- project info ---
     # p.printSettings()

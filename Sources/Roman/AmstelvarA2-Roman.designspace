@@ -2688,6 +2688,30 @@
       </mapping>
     </mappings>
   </axes>
+  <rules>
+    <rule name="bars">
+      <conditionset>
+        <condition name="wght" minimum="750" maximum="1000"/>
+      </conditionset>
+      <conditionset>
+        <condition name="wdth" minimum="50" maximum="75"/>
+      </conditionset>
+      <sub name="Q" with="Q.rvrn"/>
+      <sub name="Oslash" with="Oslash.rvrn"/>
+      <sub name="Oslashacute" with="Oslashacute.rvrn"/>
+      <sub name="oslash" with="oslash.rvrn"/>
+      <sub name="oslashacute" with="oslashacute.rvrn"/>
+      <sub name="dollar" with="dollar.rvrn"/>
+      <sub name="cent" with="cent.rvrn"/>
+      <sub name="naira" with="naira.rvrn"/>
+      <sub name="won" with="won.rvrn"/>
+      <sub name="kip" with="kip.rvrn"/>
+      <sub name="peso" with="peso.rvrn"/>
+      <sub name="cedi" with="cedi.rvrn"/>
+      <sub name="colonsign" with="colonsign.rvrn"/>
+      <sub name="guarani" with="guarani.rvrn"/>
+    </rule>
+  </rules>
   <sources>
     <source filename="AmstelvarA2-Roman_wght400.ufo" name="wght400" familyname="AmstelvarA2 Roman" stylename="wght400">
       <location>

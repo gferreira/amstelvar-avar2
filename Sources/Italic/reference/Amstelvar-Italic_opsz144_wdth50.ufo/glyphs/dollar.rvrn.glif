@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="dollar.rvrn" format="2">
+	<unicode hex="0024"/>
 	<advance width="685"/>
 	<outline>
 		<contour>
@@ -45,10 +46,6 @@
 		<contour>
 			<point x="189" y="-142" type="line"/>
 			<point x="216" y="32" type="line"/>
-			<point x="216" y="32" type="line"/>
-			<point x="219" y="47" type="line"/>
-			<point x="242" y="47" type="line"/>
-			<point x="238" y="26" type="line"/>
 			<point x="238" y="26" type="line"/>
 			<point x="212" y="-135" type="line"/>
 		</contour>
@@ -56,10 +53,6 @@
 			<point x="457" y="1570" type="line"/>
 			<point x="479" y="1573" type="line"/>
 			<point x="463" y="1465" type="line"/>
-			<point x="463" y="1465" type="line"/>
-			<point x="461" y="1456" type="line"/>
-			<point x="439" y="1458" type="line"/>
-			<point x="441" y="1471" type="line"/>
 			<point x="441" y="1471" type="line"/>
 		</contour>
 	</outline>

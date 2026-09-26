@@ -20,7 +20,7 @@ _parametricAxesRoman += 'XOLC YOLC XOLA YOLA XTLC XTLR XTLD XTLA YTLC YTAS YTDE 
 _parametricAxesRoman += 'XOFI YOFI           XTFI                YTFI           XSHF YSHF XSVF YSVF      XFIR           ' # figures
 _parametricAxesRoman += 'XOET YOET           XTET                                                        XETS           ' # etcetera  # XSHE YSHE XSVE YSVE ??
 
-_parametricAxesRoman += 'XDOT YTOS XTTW YTTL BARS'
+_parametricAxesRoman += 'XDOT YTOS XTTW YTTL' # BARS
 _parametricAxesRoman  = _parametricAxesRoman.split()
 
 _parametricAxesItalic = _parametricAxesRoman
@@ -69,6 +69,35 @@ class AmstelvarA2Controller(xProject):
         'YHAA' : 'YHAU',
     }
     _parentParametricHidden = False
+
+    _substitutionRules = {
+        "bars" : [
+            # condition sets
+            [
+                [
+                    dict(tag="wght", minimum=750, maximum=1000),
+                    dict(tag="wdth", minimum=50),
+                ],
+            ],
+            # substitutions
+            [
+                ( "Q",           "Q.rvrn" ),
+                ( "Oslash",      "Oslash.rvrn" ),
+                ( "Oslashacute", "Oslashacute.rvrn" ),
+                ( "oslash",      "oslash.rvrn" ),
+                ( "oslashacute", "oslashacute.rvrn" ),
+                ( "dollar",      "dollar.rvrn" ),
+                ( "cent",        "cent.rvrn" ),
+                ( "naira",       "naira.rvrn" ),
+                ( "won",         "won.rvrn" ),
+                ( "kip",         "kip.rvrn" ),
+                ( "peso",        "peso.rvrn" ),
+                ( "cedi",        "cedi.rvrn" ),
+                ( "colonsign",   "colonsign.rvrn" ),
+                ( "guarani",     "guarani.rvrn" ),
+            ],
+        ],
+    }
 
     tuning = True
 
@@ -144,29 +173,12 @@ class AmstelvarA2Controller(xProject):
                 infoFamilyName=f'{self.familyName} {self.subFamily}',
         )
 
-    def addParametricSources(self):
-        super().addParametricSources(familyName=f'{self.familyName} {self.subFamily}')
-
-    def addDefaultSource(self):
-        super().addDefaultSource(familyName=f'{self.familyName} {self.subFamily}')
-
-    def addBlendedAxes(self):
-        super().addBlendedAxes()
-        for axis in self.designspace.axes:
-            if axis.tag in self._blendedAxesMappings:
-                axis.map = self._blendedAxesMappings[axis.tag]
-            # hide parent parametric axes
-            if self._parentParametricHidden and axis.tag in self.parentParametricAxes:
-                axis.hidden = True
-
-    def addTuningSources(self):
-        super().addTuningSources(familyName=f'{self.familyName} {self.subFamily}')
-
-    def addInstances(self):
-        super().addInstances(familyName=f'{self.familyName} {self.subFamily}')
+    def updateGlyphsFromDefault(self, glyphNames, oldDefaultName, preflight=True, parametric=True, tuning=True):
+        oldDefaultPath = os.path.join(self.sourcesFolder, f'{self.familyName}-{self.subFamily}_{oldDefaultName}.ufo')
+        super().updateGlyphsFromDefault(glyphNames, oldDefaultPath, preflight=preflight, parametric=parametric, tuning=tuning)
 
     def extractMeasurements(self):
-        
+
         # maybe this needs to be defined somewhere else
         axes = {
             "opsz" : {
@@ -211,6 +223,30 @@ class AmstelvarA2Controller(xProject):
 
         print(f'({os.path.exists(referenceBlendsPath)})\n')
 
+    def addParametricSources(self):
+        super().addParametricSources(familyName=f'{self.familyName} {self.subFamily}')
+
+    def addDefaultSource(self):
+        super().addDefaultSource(familyName=f'{self.familyName} {self.subFamily}')
+
+    def addBlendedAxes(self):
+        super().addBlendedAxes()
+        for axis in self.designspace.axes:
+            if axis.tag in self._blendedAxesMappings:
+                axis.map = self._blendedAxesMappings[axis.tag]
+            # hide parent parametric axes
+            if self._parentParametricHidden and axis.tag in self.parentParametricAxes:
+                axis.hidden = True
+
+    def addTuningSources(self):
+        super().addTuningSources(familyName=f'{self.familyName} {self.subFamily}')
+
+    def addInstances(self):
+        super().addInstances(familyName=f'{self.familyName} {self.subFamily}')
+
+    def addSubstitutionRules(self):
+        pass
+
     def buildBlendsFile(self, parentParametric=True):
         if not os.path.exists(self.referenceBlendsPath):
             return
@@ -244,7 +280,7 @@ class AmstelvarA2Controller(xProject):
                 for tuningStyle, tuningAxis in self.tuningAxes.items():
                     tuningValue = tuningAxis.maximum if styleName == tuningStyle else tuningAxis.default
                     # print(f'\t\tadding tuning blend: {styleName} {tuningAxis.tag} {tuningValue}...')
-                    tuningAxisName = tuningStyle if self.useLongAxisNames else tuningAxis.tag 
+                    tuningAxisName = tuningStyle if self.useLongAxisNames else tuningAxis.tag
                     blendsDict['sources'][styleName][tuningAxisName] = tuningValue
 
         for axisName in self._spacingAxes:
@@ -337,6 +373,8 @@ class AmstelvarA2Controller(xProject):
 
     def patchBlendsFile(self):
 
+        # DEPRECATED!
+
         # import blends data
         with open(self.blendsPath, 'r', encoding='utf-8') as f:
             blendsDict = json.load(f)
@@ -360,10 +398,6 @@ class AmstelvarA2Controller(xProject):
         # save patched blends data
         with open(self.blendsPath, 'w', encoding='utf-8') as f:
             json.dump(blendsDict, f, indent=2)
-
-    def updateGlyphsFromDefault(self, glyphNames, oldDefaultName, preflight=True, parametric=True, tuning=True):
-        oldDefaultPath = os.path.join(self.sourcesFolder, f'{self.familyName}-{self.subFamily}_{oldDefaultName}.ufo')
-        super().updateGlyphsFromDefault(glyphNames, oldDefaultPath, preflight=preflight, parametric=parametric, tuning=tuning)
 
     def buildDesignspace(self, instances=False, parentParametric=False):
 
@@ -404,6 +438,9 @@ class AmstelvarA2Controller(xProject):
             sortedAxes.append(axis)
         self.designspace.axes = sortedAxes
 
+        # TO-DO: implement glyph substitution rules (BARS)
+        # self.addSubstitutionRules()
+
         self.save()
 
     def proofSourcesGlyphSet(self, showCompatible=True, validateComposites=True):
@@ -430,7 +467,7 @@ if __name__ == '__main__':
 
     folder = os.path.dirname(os.getcwd())
 
-    subFamily = ['Roman', 'Italic'][0]
+    subFamily = ['Roman', 'Italic'][1]
 
     start = time.time()
 
@@ -438,8 +475,8 @@ if __name__ == '__main__':
 
     referenceSource = os.path.join(p.referenceSourcesFolder, 'deprecated', f'Amstelvar-{subFamily}_wght400.ufo')
 
-    glyphNames = ['finalsigma']
-    # glyphNames = 'diagonalbaro diagonalbarO asciicircum'.split()
+    # glyphNames = ['Oslash']
+    glyphNames = 'Oslash.rvrn oslash.rvrn'.split()
     # glyphNames = parseGString(p.defaultFont, '/ae/OE')
     # glyphNames = p.smartSets['figures']['oldstyle']
     # glyphNames = p.smartSets['uppercase']['greek'] + p.smartSets['lowercase']['greek']
@@ -461,7 +498,7 @@ if __name__ == '__main__':
     # p.copyKerningFromDefault()
 
     # --- building glyphs ---
-    # p.buildCompositeGlyphs(glyphNames, parametric=True, tuning=False, reference=True, preflight=False)
+    # p.buildCompositeGlyphs(glyphNames, parametric=False, tuning=False, reference=True, preflight=False)
 
     # --- measuring ---
     # p.extractMeasurements()
@@ -469,8 +506,8 @@ if __name__ == '__main__':
     # --- build designspace ---
     # p.parametricAxesHidden = True
     # p.tuningAxesHidden = True
-    # p.tuning = True # also used to direct BlendsPreview proof to its folder
-    # p.useLongAxisNames = True # keep it disabled during development!
+    # p.tuning = False # also used to direct BlendsPreview proof to its folder
+    # p.useLongAxisNames = False # keep it disabled during development!
     # p.buildDesignspace(instances=True, parentParametric=True)
     # p.validateDesignspace(locations=True, mappings=True, instances=False)
     # p.validateSources(parametric=False, tuning=False, reference=True)
@@ -482,7 +519,7 @@ if __name__ == '__main__':
     # p.calculateTuningSources(glyphNames, referenceSource, levels=[1,2,3], tuneBaseGlyphs=True)
 
     # --- normalization ---
-    # p.cleanupSources(parametric=True, tuning=True, reference=True)
+    p.cleanupSources(parametric=True, tuning=True, reference=True)
     p.normalizeSources(parametric=True, tuning=True, reference=True)
 
     # --- project info ---
@@ -502,3 +539,4 @@ if __name__ == '__main__':
 
     end = time.time()
     timer(start, end)
+ 

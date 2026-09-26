@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Oslashacute.rvrn" format="2">
+  <advance width="1425"/>
+  <outline>
+    <component base="O"/>
+    <component base="diagonalbarO.rvrn" xOffset="422.5100000000093" yOffset="14.480000000010477"/>
+    <component base="acutecomb.case" xOffset="712.5"/>
+  </outline>
+</glyph>

@@ -442,14 +442,14 @@ if __name__ == '__main__':
 
     folder = os.path.dirname(os.getcwd())
 
-    subFamily = ['Roman', 'Italic'][1]
+    subFamily = ['Roman', 'Italic'][0]
 
     start = time.time()
 
     p = AmstelvarA2Controller(folder, 'AmstelvarA2', subFamily)
 
-    # glyphNames = ['ninesuperior']
-    # glyphNames = p.defaultFont.glyphOrder
+    # glyphNames = ['n']
+    # glyphNames = list(p.defaultFont.glyphOrder)
     # glyphNames = 'Acircumflexgrave Ecircumflexgrave Ocircumflexgrave acircumflexgrave ecircumflexgrave ocircumflexgrave'.split()
     # glyphNames = parseGString(p.defaultFont, '/ae/OE')
     # glyphNames  = p.smartSets['figures']['proportional']
@@ -462,7 +462,7 @@ if __name__ == '__main__':
 
     # --- managing sources ---
     # p.createParametricSources(['XVAU'], minSource=True, maxSource=True)
-    # p.setSourceNamesFromMeasurements(preflight=True)
+    # p.setSourceNamesFromMeasurements(preflight=False)
     # for src, dst in [('XOLC', 'XOET'), ('YOLC', 'YOET'), ('XTLC', 'XTET'), ('XLCS', 'XETS')]:
     #     p.splitSources(src, dst, glyphNames, preflight=False)
 
@@ -486,18 +486,18 @@ if __name__ == '__main__':
     # p.tuning = True # also used to direct BlendsPreview proof to its folder
     # p.useLongAxisNames = True # keep it disabled during development!
     # p.buildDesignspace(instances=True, parentParametric=True, substitutionRules=True)
-    # p.validateDesignspace(locx    ations=True, mappings=True, instances=False)
+    # p.validateDesignspace(locations=True, mappings=True, instances=False)
     # p.validateSources(parametric=False, tuning=False, reference=True)
 
     # --- tuning ---
     # p.tuningLevels = [1, 2, 3]
     # p.createTuningSources(sparse=False)
     # p.resetTuningSources()
-    # p.calculateTuningSources(glyphNames, levels=[1,2,3], tuneBaseGlyphs=True)
+    # p.calculateTuningSources(glyphNames, levels=[1,2,3], tuneBaseGlyphs=True, locations=['wght1000', 'wght1000_wdth125'])
 
     # --- normalization ---
     # p.roundSources(parametric=True, tuning=True, reference=True)
-    # p.cleanupSources(parametric=True, tuning=True, reference=True)
+    p.cleanupSources(parametric=True, tuning=True, reference=True)
     p.normalizeSources(parametric=True, tuning=True, reference=True)
 
     # --- project info ---
@@ -512,7 +512,7 @@ if __name__ == '__main__':
     # p.proofSourcesGlyphSet(showCompatible=False, validateComposites=True)
 
     # --- build fonts ---
-    p.buildVariableFont(debug=False, featureWriter=False, noGDEF=False, subset=None)
+    # p.buildVariableFont(debug=False, featureWriter=False, noGDEF=False, subset=None)
     # p.buildInstancesVariableFont(clear=True, ufo=True)
 
     end = time.time()

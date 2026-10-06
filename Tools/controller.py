@@ -442,12 +442,11 @@ if __name__ == '__main__':
 
     folder = os.path.dirname(os.getcwd())
 
-    subFamily = ['Roman', 'Italic'][0]
+    subFamily = ['Roman', 'Italic'][1]
 
     start = time.time()
 
     p = AmstelvarA2Controller(folder, 'AmstelvarA2', subFamily)
-
 
     # glyphNames = ['five.lc']
     # glyphNames = list(p.defaultFont.glyphOrder)
@@ -498,7 +497,7 @@ if __name__ == '__main__':
 
     # --- normalization ---
     # p.roundSources(parametric=True, tuning=True, reference=True)
-    p.cleanupSources(parametric=True, tuning=True, reference=True)
+    # p.cleanupSources(parametric=True, tuning=True, reference=True)
     p.normalizeSources(parametric=True, tuning=True, reference=True)
 
     # --- project info ---
@@ -513,7 +512,7 @@ if __name__ == '__main__':
     # p.proofSourcesGlyphSet(showCompatible=False, validateComposites=True)
 
     # --- build fonts ---
-    # p.buildVariableFont(debug=False, featureWriter=False, noGDEF=False, subset=None)
+    p.buildVariableFont(debug=False, featureWriter=False, noGDEF=False, subset=None)
     # p.buildInstancesVariableFont(clear=True, ufo=True)
 
     end = time.time()

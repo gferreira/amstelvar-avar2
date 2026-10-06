@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="Ha" format="2">
 	<unicode hex="0425"/>
-	<advance width="2044"/>
+	<advance width="2132"/>
 	<outline>
-		<component base="X"/>
+		<component base="X" xScale="1" yScale="1"/>
 	</outline>
 </glyph>

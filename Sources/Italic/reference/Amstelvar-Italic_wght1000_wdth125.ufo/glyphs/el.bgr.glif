@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="el.bgr" format="2">
-	<advance width="1689"/>
+	<advance width="1708"/>
 	<outline>
-		<component base="el"/>
+		<component base="el" xScale="1" yScale="1"/>
 	</outline>
 </glyph>

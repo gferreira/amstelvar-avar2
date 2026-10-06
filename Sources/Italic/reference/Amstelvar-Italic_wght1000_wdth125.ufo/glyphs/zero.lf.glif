@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="zero.lf" format="2">
-	<advance width="1930"/>
+	<advance width="2071"/>
 	<outline>
-		<component base="zero"/>
+		<component base="zero" xScale="1" yScale="1"/>
 	</outline>
 </glyph>

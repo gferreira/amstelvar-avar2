@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="ocyr" format="2">
 	<unicode hex="043E"/>
-	<advance width="1492"/>
+	<advance width="1586"/>
 	<outline>
-		<component base="o"/>
+		<component base="o" xScale="1" yScale="1"/>
 	</outline>
 </glyph>

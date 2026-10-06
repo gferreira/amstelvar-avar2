@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <glyph name="i.bgr" format="2">
-	<advance width="1595"/>
+	<advance width="1653"/>
 	<outline>
-		<component base="u"/>
+		<component base="u" xScale="1" yScale="1"/>
 	</outline>
 </glyph>
